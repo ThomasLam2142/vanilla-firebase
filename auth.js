@@ -19,3 +19,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+
+const loginButton = document.getElementById('login-button');
+
+// Event listener for login button
+loginButton.addEventListener('click', async () => {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try {
+        const result = await firebase.auth().signInWithPopup(provider);
+        const user = result.user;
+        // Redirect to the dashboard page after successful login
+        window.location.href = 'dashboard.html';
+    } catch (error) {
+        console.error(error);
+    }
+});
